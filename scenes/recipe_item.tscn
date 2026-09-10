@@ -1,0 +1,38 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="src/ui/workbench/RecipeItemBehaviour.cs" id="1_script"]
+
+[node name="RecipeItem" type="Control" script=ExtResource("1_script")]
+custom_minimum_size = Vector2(0, 30)
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecipeContent" type="Control" parent="HBox"]
+custom_minimum_size = Vector2(100, 30)
+
+[node name="RecipeContentHbox" type="HBoxContainer" parent="HBox/RecipeContent"]
+
+[node name="TxtName" type="Label" parent="HBox"]
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="TxtTime" type="Label" parent="HBox"]
+custom_minimum_size = Vector2(40, 30)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 12

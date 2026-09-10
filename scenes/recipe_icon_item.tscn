@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="src/ui/workbench/RecipeIconItemBehaviour.cs" id="1_script"]
+
+[node name="RecipeIconItem" type="Control" script=ExtResource("1_script")]
+
+[node name="Img" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Txt" type="Label" parent="."]
+layout_mode = 0
+position = Vector2(24, 20)
+horizontal_alignment = 2
+vertical_alignment = 2
+theme_override_font_sizes/font_size = 10
