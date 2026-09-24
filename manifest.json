@@ -8,27 +8,26 @@
     "src/*.cs"
   ],
   "depends": [ "core>=1", "interface>=1" ],
-  "subscriptions": [
+  "ui": [
     {
+      "id": "cooking_workbench",
+      "kind": "overlay",
       "scene": "home_kitchen",
-      "template": "default",
-      "code": "cooking_panel_init",
-      "trigger": "on_enter",
+      "slot": "ModLastPanel",
+      "scene_path": "scenes/cooking_panel.tscn",
+      "once": true,
+      "show_on_start": false,
       "priority": 10
     },
     {
+      "id": "ration_stats",
+      "kind": "overlay",
       "scene": "home_kitchen",
-      "template": "default",
-      "code": "dinner_tools_show",
-      "trigger": "on_enter",
+      "slot": "Lastground",
+      "scene_path": "scenes/ration_statistics_panel.tscn",
+      "once": false,
+      "show_on_start": true,
       "priority": 20
-    },
-    {
-      "scene": "home_kitchen",
-      "template": "default",
-      "code": "dinner_tools_hide",
-      "trigger": "on_exit",
-      "priority": 10
     }
   ]
 }
