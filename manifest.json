@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "ct",
   "description": "Cooking mechanic - full autonomous mod",
+  "category": "gameplay",
   "sources": [
     "src/*.cs"
   ],
