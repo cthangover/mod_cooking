@@ -29,10 +29,10 @@ custom_minimum_size = Vector2(100, 30)
 
 [node name="TxtName" type="Label" parent="HBox"]
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_color = Color(0.941176, 0.756863, 0.411765, 1)
 theme_override_font_sizes/font_size = 12
 
 [node name="TxtTime" type="Label" parent="HBox"]
 custom_minimum_size = Vector2(40, 30)
-theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(0.909804, 0.662745, 0.670588, 1)
 theme_override_font_sizes/font_size = 12

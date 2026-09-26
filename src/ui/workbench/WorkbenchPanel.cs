@@ -7,6 +7,7 @@ using Cthangover.Core.Items;
 using Cthangover.Core.Scenes;
 using Cthangover.Core.Settings;
 using Cthangover.Core.UI;
+using Cthangover.Core.UI.Theming;
 using Cthangover.Core.UI.Tool;
 using Cthangover.Core.UI.Inventory;
 using Godot;
@@ -38,7 +39,7 @@ namespace Mods.Cooking.Workbench
 
             var leftTitle = GetNode<Label>("HBox/LeftPanel/LeftTitle");
             leftTitle.Text = TranslationServer.Translate("ui/cook/title");
-            leftTitle.AddThemeFontSizeOverride("font_size", 16);
+            leftTitle.AddThemeFontSizeOverride("font_size", UiTokens.FontLead);
 
             content = GetNode<VBoxContainer>("HBox/LeftPanel/Scroll/Content");
 
@@ -109,7 +110,7 @@ namespace Mods.Cooking.Workbench
         public void ClickRecipe(IRecipe recipe, RecipeItemBehaviour recipeItemBehaviour)
         {
             if (txtDescription != null)
-            txtDescription.Text = "[b][color=yellow]" + TranslationServer.Translate(recipe.Name) + "[/color][/b]\n\n" +
+            txtDescription.Text = "[b][color=#" + UiTokens.AccentBright.ToHtml(false) + "]" + TranslationServer.Translate(recipe.Name) + "[/color][/b]\n\n" +
                 TranslationServer.Translate(recipe.Description);
             
             outputContainer.List = recipe.Output.Select(o => (IItemContainer)new ItemContainer

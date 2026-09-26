@@ -3,6 +3,7 @@ using Cthangover.Core.Items;
 using Cthangover.Core.Scenes;
 using Cthangover.Core.Settings;
 using Cthangover.Core.UI;
+using Cthangover.Core.UI.Theming;
 using Godot;
 
 namespace Mods.Cooking.Workbench
@@ -25,9 +26,9 @@ namespace Mods.Cooking.Workbench
         private Label txtTime;
         private HBoxContainer recipeContentHbox;
 
-        private static readonly Color normalColor = new(1f, 1f, 1f, 1f);
-        private static readonly Color selectedColor = new(0.8f, 0.8f, 0.8f, 1f);
-        private static readonly Color disableColor = new(0.5f, 0.5f, 0.5f, 1f);
+        private static readonly Color normalColor = UiTokens.White;
+        private static readonly Color selectedColor = UiTokens.Alpha(UiTokens.White, 0.8f);
+        private static readonly Color disableColor = UiTokens.Muted;
 
         private IRecipe recipe;
         private Node panel;
@@ -79,8 +80,8 @@ namespace Mods.Cooking.Workbench
         /// Refreshes the visual availability state of this recipe.
         /// Iterates all child <see cref="RecipeIconItemBehaviour"/> widgets,
         /// calling <c>CheckAndUpdate</c> on each. If any ingredient is missing,
-        /// tints the name and time labels with <c>disableColor</c> (greyed out);
-        /// otherwise restores the default yellow/red colour scheme.
+        /// tints the name and time labels with <c>disableColor</c> (muted);
+        /// otherwise restores the accent (gold) and danger (red) colour scheme.
         /// Call after inventory changes or cooking operations.
         /// </summary>
         public void UpdateState()
@@ -98,8 +99,8 @@ namespace Mods.Cooking.Workbench
             }
             else
             {
-                txtName.AddThemeColorOverride("font_color", Colors.Yellow);
-                txtTime.AddThemeColorOverride("font_color", Colors.Red);
+                txtName.AddThemeColorOverride("font_color", UiTokens.AccentBright);
+                txtTime.AddThemeColorOverride("font_color", UiTokens.DangerText);
             }
         }
 
@@ -143,7 +144,7 @@ namespace Mods.Cooking.Workbench
             {
                 var plus = new Label();
                 plus.Text = "+";
-                plus.AddThemeFontSizeOverride("font_size", 12);
+                plus.AddThemeFontSizeOverride("font_size", UiTokens.FontBodySmall);
                 plus.VerticalAlignment = VerticalAlignment.Center;
                 recipeContentHbox.AddChild(plus);
                 items.Add(plus);

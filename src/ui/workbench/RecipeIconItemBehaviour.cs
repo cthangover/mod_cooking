@@ -1,6 +1,7 @@
 using Cthangover.Core.Items;
 using Cthangover.Core.Settings;
 using Cthangover.Core.UI;
+using Cthangover.Core.UI.Theming;
 using Cthangover.Core.Utils;
 using Godot;
 
@@ -15,8 +16,8 @@ namespace Mods.Cooking.Workbench
     /// </summary>
     public class RecipeIconItemBehaviour : Widget
     {
-        private static readonly Color NormalColor = Colors.White;
-        private static readonly Color NotItemsColor = Colors.Gray;
+        private static readonly Color NormalColor = UiTokens.InkBright;
+        private static readonly Color NotItemsColor = UiTokens.Muted;
 
         private TextureRect img;
         private Label txt;
@@ -53,8 +54,8 @@ namespace Mods.Cooking.Workbench
         /// <summary>
         /// Evaluates whether the player's inventory contains enough of the
         /// required ingredient. Tints the icon and count text to
-        /// <c>NormalColor</c> (white) when satisfied or <c>NotItemsColor</c>
-        /// (grey) when insufficient. Called by the parent
+        /// <c>NormalColor</c> (bright ink) when satisfied or <c>NotItemsColor</c>
+        /// (muted) when insufficient. Called by the parent
         /// <see cref="RecipeItemBehaviour"/> during state refresh.
         /// </summary>
         /// <returns><c>true</c> if inventory meets or exceeds the required count.</returns>
@@ -62,7 +63,7 @@ namespace Mods.Cooking.Workbench
         {
             var result = GameData.Instance.Runtime.Inventory.CheckCount(ingredient.Item) >= ingredient.Count;
             txt.AddThemeColorOverride("font_color", result ? NormalColor : NotItemsColor);
-            img.Modulate = result ? Colors.White : NotItemsColor;
+            img.Modulate = result ? UiTokens.White : NotItemsColor;
             return result;
         }
     }

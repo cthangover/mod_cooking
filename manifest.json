@@ -8,7 +8,7 @@
   "sources": [
     "src/*.cs"
   ],
-  "depends": [ "core>=1", "interface>=1" ],
+  "depends": [ "visual_novel_core>=1", "interface>=1" ],
   "ui": [
     {
       "id": "cooking_workbench",
