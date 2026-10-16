@@ -9,9 +9,11 @@ using Cthangover.Core.Settings;
 using Cthangover.Core.UI;
 using Cthangover.Core.UI.Theming;
 using Cthangover.Core.UI.Tool;
+using Cthangover.Mods.Time;
 using Cthangover.Core.UI.Inventory;
 using Godot;
 
+using Cthangover.Mods.Interface.Base.Lists;
 namespace Mods.Cooking.Workbench
 {
     /// <summary>
@@ -122,12 +124,12 @@ namespace Mods.Cooking.Workbench
 
         /// <summary>
         /// Hides the workbench panel and plays a UI close-click sound
-        /// via the scene's <see cref="AudioService"/> node.
+        /// via the scene's <see cref="IAudioService"/> node.
         /// </summary>
         public void OnCloseClick()
         {
             Hide();
-            var audioService = SceneContextNode.FindNode<AudioService>("AudioService");
+            var audioService = SceneContextNode.FindNode<Node>("AudioService") as IAudioService;
             audioService?.PlaySound("ui/close_click", SoundType.UI);
         }
 
@@ -160,7 +162,7 @@ namespace Mods.Cooking.Workbench
             var timer = SceneContextNode.FindNode<TimeController>("TimeController");
             timer?.UpdateRenderedTime();
 
-            var audioService = SceneContextNode.FindNode<AudioService>("AudioService");
+            var audioService = SceneContextNode.FindNode<Node>("AudioService") as IAudioService;
             audioService?.PlaySound("ui/cook", SoundType.UI);
 
             foreach (var recipe in recipes)
