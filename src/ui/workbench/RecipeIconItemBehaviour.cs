@@ -5,6 +5,7 @@ using Cthangover.Core.UI.Theming;
 using Cthangover.Core.Utils;
 using Godot;
 
+using Cthangover.Mods.Interface.Base.Lists;
 namespace Mods.Cooking.Workbench
 {
     /// <summary>

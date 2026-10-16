@@ -3,12 +3,15 @@
   "name": "Cooking",
   "version": "1.0.0",
   "author": "ct",
-  "description": "Cooking mechanic - full autonomous mod",
+  "description": "Autonomous cooking mechanic: the kitchen workbench overlay in home_kitchen with recipe-based cooking (e.g. wolf meat into rations), a ration statistics panel and the home_kitchen_cooking scenario.",
   "category": "gameplay",
   "sources": [
     "src/*.cs"
   ],
-  "depends": [ "visual_novel_core>=1", "interface>=1" ],
+  "test_sources": [
+    "tests/*.cs"
+  ],
+  "depends": [ "visual_novel_core>=1", "interface>=1", "items_base>=1", "time_base>=1" ],
   "ui": [
     {
       "id": "cooking_workbench",
