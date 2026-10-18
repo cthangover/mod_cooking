@@ -435,7 +435,7 @@ namespace Mods.CookingWalkTest
             {
                 // IDialogBox — контракт ядра без Node-членов; сам бокс живёт
                 // под concrete-узлом DialogBox в дереве.
-                var box = (dialogBox as Node)?.FindChild("AnswerBox", true, false) as Control;
+                var box = FindAnswerBox(dialogBox as Node);
                 if (box == null)
                     throw new CheckException("AnswerBox node not found under dialog box");
                 var content = box.FindChild("Content", true, false);
@@ -449,6 +449,30 @@ namespace Mods.CookingWalkTest
 
                 button.EmitSignal("pressed");
             });
+        }
+
+        /// <summary>
+        /// Ищет показанный AnswerBox по типу, а не по имени узла: прошлый бокс
+        /// освобождается через QueueFree при скрытии, и если следующий вопрос
+        /// открывается в том же кадре, новый бокс получает автоимя
+        /// (<c>@Control@N</c>), а старый с именем «AnswerBox» уже помечен на удаление.
+        /// </summary>
+        private static Cthangover.Mods.Dialog.AnswerBox FindAnswerBox(Node node)
+        {
+            if (node == null)
+                return null;
+
+            foreach (var child in node.GetChildren())
+            {
+                if (child is Cthangover.Mods.Dialog.AnswerBox box && !box.IsQueuedForDeletion() && box.Visible)
+                    return box;
+
+                var found = FindAnswerBox(child);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
         }
 
         private bool TryGetDialogBox(out IDialogBox box)
