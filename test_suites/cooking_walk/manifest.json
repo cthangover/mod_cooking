@@ -5,7 +5,7 @@
     "src/*.cs"
   ],
   "depends": [
-    "cthangover_story>=1",
+    "cthangover_game>=1",
     "items_base>=1",
     "ui_base>=1",
     "dialog_base>=1"
