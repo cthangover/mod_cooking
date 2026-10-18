@@ -89,7 +89,7 @@ namespace Cthangover.Cooking.Tests
             ModAssert.NotNull(raw, "manifest.json exists");
             using var doc = JsonDocument.Parse(raw);
             var depends = doc.RootElement.GetProperty("depends");
-            var found = new[] { "visual_novel_core", "interface", "items_base", "time_base" };
+            var found = new[] { "cthangover_story", "ui_base", "items_base", "time_base" };
             foreach (var dep in found)
             {
                 var ok = false;
