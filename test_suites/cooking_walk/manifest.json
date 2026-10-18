@@ -5,9 +5,9 @@
     "src/*.cs"
   ],
   "depends": [
-    "visual_novel_core>=1",
+    "cthangover_story>=1",
     "items_base>=1",
-    "interface>=1",
+    "ui_base>=1",
     "dialog_base>=1"
   ]
 }
