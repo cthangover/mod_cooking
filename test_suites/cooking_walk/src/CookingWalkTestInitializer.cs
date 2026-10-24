@@ -41,7 +41,7 @@ namespace Mods.CookingWalkTest
 
             // Deferred: сцена ещё не готова; драйвер сам ждёт Boot.IsReady и
             // появления CurrentScene, поэтому порядок с загрузкой сцены не важен.
-            (Godot.Engine.GetMainLoop() as SceneTree)?.Root?.CallDeferred("add_child", new CookingWalkTestDriverNode(timeout));
+            ModRoot.AddDeferred(new CookingWalkTestDriverNode(timeout));
         }
 
         private static float? ParseTimeout(string[] args)
