@@ -3,7 +3,7 @@
   "name": "Cooking",
   "version": "1.0.0",
   "author": "ct",
-  "description": "Autonomous cooking mechanic: the kitchen workbench overlay in home_kitchen with recipe-based cooking (e.g. wolf meat into rations), a ration statistics panel and the home_kitchen_cooking scenario.",
+  "description": "The kitchen of Cthangover: learn recipes, cook at the home_kitchen workbench and keep an eye on the party's rations.",
   "category": "gameplay",
   "sources": [
     "src/*.cs"

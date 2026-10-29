@@ -48,6 +48,7 @@ horizontal_scroll_mode = 3
 
 [node name="Content" type="VBoxContainer" parent="HBox/LeftPanel/Scroll"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="RightPanel" type="VBoxContainer" parent="HBox"]
 layout_mode = 2
