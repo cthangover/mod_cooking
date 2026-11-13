@@ -6,8 +6,8 @@
   ],
   "depends": [
     "cthangover_game>=0.1.0",
-    "items_base>=1",
-    "ui_base>=1",
-    "dialog_base>=1"
+    "items_base>=0.1.0",
+    "ui_base>=0.1.0",
+    "dialog_base>=0.1.0"
   ]
 }

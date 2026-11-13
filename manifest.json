@@ -1,7 +1,7 @@
 {
   "id": "cooking",
   "name": "Cooking",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "author": "ct",
   "description": "The kitchen of Cthangover: learn recipes, cook at the home_kitchen workbench and keep an eye on the party's rations.",
   "category": "gameplay",
@@ -11,7 +11,7 @@
   "test_sources": [
     "tests/*.cs"
   ],
-  "depends": [ "cthangover_game>=0.1.0", "ui_base>=1", "items_base>=1", "time_base>=1" ],
+  "depends": [ "cthangover_game>=0.1.0", "ui_base>=0.1.0", "items_base>=0.1.0", "time_base>=0.1.0" ],
   "ui": [
     {
       "id": "cooking_workbench",
