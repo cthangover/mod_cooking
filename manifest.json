@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "author": "ct",
   "description": "The kitchen of Cthangover: learn recipes, cook at the home_kitchen workbench and keep an eye on the party's rations.",
-  "category": "gameplay",
+  "categories": ["gameplay"],
   "sources": [
     "src/*.cs"
   ],
