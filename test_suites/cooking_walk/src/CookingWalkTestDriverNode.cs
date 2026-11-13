@@ -22,8 +22,8 @@ namespace Mods.CookingWalkTest
     /// публичным игровым путём: использование предмета-рецепта
     /// (<c>IItem.ItemAction.UseAction</c>) — как это делает инвентарь.
     ///
-    /// Машина состояний: один шаг за тик таймера (0.4с), чтобы успевали
-    /// применяться отложенные смены сцен и пересборки панелей. Каждый шаг —
+    /// Машина состояний ждёт готовности сцены/панели и двух настоящих кадров.
+    /// Scene/panel readiness and two actual frames release each step. Каждый шаг —
     /// отдельная проверка: провал фиксируется, но не обрывает маршрут (кроме
     /// неожиданных исключений). Ожидание смены сцены — по
     /// <c>SceneManager.CurrentSceneName</c>, ожидание меню — по
@@ -34,8 +34,11 @@ namespace Mods.CookingWalkTest
     /// </summary>
     public partial class CookingWalkTestDriverNode : Node
     {
+        private int readinessToken = int.MinValue;
+        private ulong readinessStarted;
+        private ulong readinessFrame;
         private const string ResultName = "cooking_walk_test";
-        private const float TickSeconds = 0.4f;
+        private const float TickSeconds = 0.05f;
         private const float DefaultTimeoutSeconds = 90f;
 
         private readonly float? timeoutSeconds;
@@ -97,8 +100,26 @@ namespace Mods.CookingWalkTest
             }
         }
 
+        // Deferred UI/scene work must finish before the original assertions run.
+        private bool WaitForReadyFrames(int token, bool ready, double timeoutSeconds = 30)
+        {
+            var now = global::Godot.Time.GetTicksMsec();
+            if (readinessToken != token)
+            {
+                readinessToken = token;
+                readinessStarted = now;
+                readinessFrame = 0;
+            }
+            if (now - readinessStarted > timeoutSeconds * 1000)
+                throw new global::System.TimeoutException($"readiness at step {token}: scene/UI did not become ready");
+            if (!ready) { readinessFrame = 0; return false; }
+            if (readinessFrame == 0) readinessFrame = global::Godot.Engine.GetProcessFrames();
+            return global::Godot.Engine.GetProcessFrames() - readinessFrame >= 2;
+        }
+
         private void RunStep()
         {
+            if (!WaitForReadyFrames(step, Boot.IsReady && GetTree().CurrentScene != null && !GodotSceneService.IsTransitioning, 30)) return;
             // Шаг 0: ждём готовности — бут завершён, сцена home_outside вошла в
             // дерево, диалог-бокс доступен.
             if (step == 0)
