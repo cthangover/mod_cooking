@@ -11,7 +11,7 @@
   "test_sources": [
     "tests/*.cs"
   ],
-  "depends": [ "cthangover_game>=0.1.0", "ui_base>=0.1.0", "items_base>=0.1.0", "time_base>=0.1.0" ],
+  "depends": [ "cthangover_game>=0.1.0", "ui_base>=0.1.0", "items_base>=0.1.0", "time_base>=0.1.0", "crafting>=0.1.0" ],
   "ui": [
     {
       "id": "cooking_workbench",

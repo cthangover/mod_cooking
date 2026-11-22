@@ -16,6 +16,8 @@ using Godot;
 using Cthangover.Mods.Interface.Base.Lists;
 namespace Mods.Cooking.Workbench
 {
+    using Cthangover.Core.Mods.Resolvers;
+    using Cthangover.Mods.Crafting;
     /// <summary>
     /// Main cooking workbench UI panel that lists available recipes,
     /// shows descriptions and output previews, and performs the actual
@@ -134,7 +136,8 @@ namespace Mods.Cooking.Workbench
         }
 
         /// <summary>
-        /// Executes the cooking operation for the currently selected recipe.
+        /// Executes the cooking operation for the currently selected recipe. The shared crafting ledger
+        /// admits the complete input/output batch before time or presentation effects can advance.
         /// Validates that the player has enough ingredients in inventory
         /// (short-circuits if not). Deducts input items, adds output items,
         /// advances in-game time by the recipe's duration, updates the
@@ -149,14 +152,9 @@ namespace Mods.Cooking.Workbench
             if (receipt == null)
                 return;
 
-            var hasItems = !receipt.Input.Any(o => inventory.CheckCount(o.Item) < o.Count);
-            if (!hasItems)
+            var definitions = Entities.Collect<RecipeInfo>();
+            if (!definitions.TryGetValue(receipt.ID, out var definition) || !CraftLedger.TryCraft(inventory, definition))
                 return;
-
-            foreach (var item in receipt.Input)
-                inventory.Remove(item.Item, item.Count);
-            foreach (var item in receipt.Output)
-                inventory.Add(item.Item, item.Count);
 
             GameData.Instance.Runtime.Time.AddTime(0, 0, 0, 0, receipt.Time);
             var timer = SceneContextNode.FindNode<TimeController>("TimeController");
